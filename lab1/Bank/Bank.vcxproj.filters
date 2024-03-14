@@ -18,13 +18,13 @@
     <ClCompile Include="bank.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Bank\Bank\kontoBankowe.ixx">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Bank\Bank\operacjeBankowe.ixx">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="menuBankowe.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="operacjeBankowe.ixx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="kontoBankowe.ixx">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -129,10 +129,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\Bank\Bank\kontoBankowe.ixx" />
-    <ClCompile Include="..\..\..\Bank\Bank\operacjeBankowe.ixx" />
     <ClCompile Include="bank.cpp" />
+    <ClCompile Include="kontoBankowe.ixx" />
     <ClCompile Include="menuBankowe.ixx" />
+    <ClCompile Include="operacjeBankowe.ixx" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
