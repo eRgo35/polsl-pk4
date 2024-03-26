@@ -1,0 +1,26 @@
+.footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+}
+
+.mainui {
+  height: calc(100vh - 130px);
+  padding: 2em;
+}
+
+.sender {
+  display: flex;
+  align-items: center;
+  justify-content:center;
+}
+
+.sender input {
+  width: 100%;
+}
