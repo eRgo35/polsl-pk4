@@ -45,20 +45,7 @@ export void menu()
 		if (res.str() == "2")
 		{
 			std::string source_path;
-			std::cout << "Podj sciezke zrodlowa: ";
-			std::cin >> source_path;
-
-			std::string destination_path;
-			std::cout << "Podaj sciezke docelowa: ";
-			std::cin >> destination_path;
-
-			backup_folder(source_path, destination_path);
-		}
-		
-		if (res.str() == "3")
-		{
-			std::string source_path;
-			std::cout << "Podj sciezke zrodlowa: ";
+			std::cout << "Podaj sciezke zrodlowa: ";
 			std::cin >> source_path;
 
 			std::string destination_path;
@@ -66,6 +53,19 @@ export void menu()
 			std::cin >> destination_path;
 
 			rename_html_files(source_path, destination_path);
+		}
+		
+		if (res.str() == "3")
+		{
+			std::string source_path;
+			std::cout << "Podaj sciezke zrodlowa: ";
+			std::cin >> source_path;
+
+			std::string destination_path;
+			std::cout << "Podaj sciezke docelowa: ";
+			std::cin >> destination_path;
+
+			backup_folder(source_path, destination_path);
 		}
 		
 		if (res.str() == "4")
