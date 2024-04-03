@@ -4,7 +4,7 @@ from flask_cors import CORS
 app = Flask(__name__)
 CORS(app)
 
-@app.route("/api/ping", method=['GET'])
+@app.route("/api/ping", methods=['GET'])
 def ping():
     return jsonify({
         'message':"pong"

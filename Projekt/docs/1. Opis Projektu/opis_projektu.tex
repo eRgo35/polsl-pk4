@@ -11,6 +11,7 @@
 % Useful packages
 \usepackage{amsmath}
 \usepackage{graphicx}
+\usepackage{listings}
 \usepackage[pdftex,
             pdfauthor={Michał Czyż, Dawid Głąb},
             pdftitle={PK4 - Opis Projektu},
@@ -23,7 +24,7 @@
 \usepackage[T1]{fontenc}
 
 \title{Projekt PK4: Platforma NLP}
-\author{Michał Czyż, Dawid Głąb}
+\author{Michał Czyż}
 
 \begin{document}
 \maketitle
@@ -48,6 +49,18 @@ Założenie projektu jest bycie modularnym i dość prostym w rozbudowie. W szcz
 
 Planowany jest następujący ogólny podział zadań. Jeśli chodzi o rdzeń programu, Dawid Głąb zajmie się badaniem sentymentu podawanego tekstu, natomiast Michał Czyż zajmie się tłumaczeniem podanego tekstu na wybrane języki. Każda z implementacji będzie spełniać wyamagania projektu, jakie były przewidziane na początku semestru. Jeśli chodzi o wartwę graficzną oraz komunikację pośrednią między interfejsem użytkownika, a samym programem w C++, Michał Czyż skupi się na bardziej na interfejsie od strony użytkownika, natomiast Dawid Głąb bardziej skupi swą uwagę nad stworzeniem poprawnego interfejsu API, między frontendem, a middlewarem. Planowane jest wykorzystanie różnych bibliotek w trakcie łączenia programu w C++ z Pythonem. 
 
+\section{Opis problemu - tłumaczenie tekstu}
+
+Problem tłumaczenia tekstu na wiele języków był trudny do zrealizowania przez długi czas. Model językowy musi potrafić nie tylko tłumaczyć odpowiadające wyrazy z jednego języka na drugi, ale także znać zasady gramatyczne panujące w danum języku oraz kontekst, gdyż to samo zdanie w wielu przypadkach może mieć różne znaczenia. 
+
+Moim sposobem na rozwiązanie tego problemu jest wykorzystanie gotowych, wytrenowanych modelów dostępnych online i następnie spróbować oprogramować je w C++, aby możliwa była interakcja i tłumaczenie tekstu z jednego języka na drugi. Chciałbym także dodać możliwośc detekcji języka, aby podany tekst był wykrywany automatycznie, przez co pozwoli na wygodniejsze użycie. 
+
+Sam problem tłumacznia wymaga wytrenowania datasetu nlp. Spróbuję wykorzystać zbiór \textit{kde4}, gdyż wspiera wiele języków. Istanieje także dostosowanie i dotrenowanie tego zbioru danych aby osiągnąć lepsze wyniki dla konktretnej pary. Oprócz tego, spróbuję wykorzystać CTranslate2, aby móc wykorzystywać tłumaczenie za pomocą \textit{llm} jak to robi na przykład projekt OpenAI Whisper.
+
+Głównym problemem jest znaleźć dobrą bibliotekę która prawidłowo obsłuży komunikację z modelem w c++, oraz zbudowanie odpowiedniej abstrakcji klas, która pozwoli na wygodną komunikację i modułowość. 
+
+Dane wejściowe do programu to będzie podane przez gRPC lub podobny protokół, tekst, który chcemy aby został przetłumaczony, oraz język źródłowy i docelowy. W przypadku wykrywania języka będzie jakiś sposób zapisu, który odróżni go od innych. 
+
 \section{Wykorzystane technologie}
 
 Projekt będzie wykorzystywał trzy języki programowania. 
@@ -60,7 +73,7 @@ Projekt będzie wykorzystywał trzy języki programowania.
 
 \section{Wykorzystane zagadnienia z laboratorium}
 
-Zagadnienia wykorzystane z laboratorium w ramach projektu, to prawdopodobnie: regex, filesystem oraz wielowątkowość i asynchroniczność.
+Zagadnienia wykorzystane z laboratorium w ramach projektu, które w tej chwili uważam, że zostaną wykorzystane to: asynchroniczność, gdyż potrzebna będzie implementacja asynchronicznej komunikacji między modelem, a samym interfejsem aplikacji obsługującym requesty; wątkowość, ponieważ może się okazać konieczne korzystanie z wielu instancji programu w celu ułatwienia wydajności i umożliwienie tłumaczenie z wielu klientów webowych jednocześnie. Chcę także wykorzystać wyrażenia regularne, aby znajdować ewentualne dane osobowe i je anonimizować, to znaczy losować z jakiś ogólnych danych aby uniknąć utraty danych osobowych. Zagadnieniem z laboratorium także wykorzystywanym będzie dostęp do systemu plików, gdyż będzie potrzebna umiejętność ładowania modelu do programu, oraz ewentualne operacje zapisuwania logów z przebiegu działania programu.
 
 \section{Propozycja interfejsu użytkownika}
 
@@ -72,5 +85,24 @@ Interfejs składa się z nagłówka i panelu bocznego z poziomu którego będą 
   \includegraphics[width=1\linewidth]{ui_mockup.png}
   \caption{\label{fig:ui mockup}Propozycja interfejsu użytkownika.}
 \end{figure}
+
+Sam program w C++ nie będzie posiadał wartwy graficznej, a tylko interfejs tekstowy pozwalający na podgląd czy połączenia z Pythonem przebiegają prawidłową. Czyli serwer słuchający na porcie i logujący requesty. Podobnie będzie z wartwą pośrednią napisaną w Pythonie. Będzie ona nasłuchiwać na zapytania z internetu i przekazywać je do głównego programu w C++. Ale dla strony Pythona, z tego powodu, że jest on pośrednikiem z częścią webową, także będzie wspierał surowe requesty po API, co pozwala na wykorzystanie platformy nie tylko poprzez interfejs graficzny, ale także pozwala na uniwersalne wykorzystanie programu, dalej przez innnych programistów. Co z założenia ułatwia dostęp do aplikacji i wzbogaca modularność. 
+
+Interfejs graficzny będzie głównie po stronie webowej. Jak zaprezentowano na rysunku.
+
+Natomiast interfejs API będzie się komunikować jako request. Poniżej propzycja dla tłumaczenia tekstu w formie JSONa:
+
+\begin{lstlisting}
+{
+  type: "<operation_type>",
+  input: "<input_text>",
+  output: "<output_text>",
+  mods: {
+    src: "<source_langugage>", 
+    dst: "<destination_language>",
+    anon: "<anonymize_data>"
+  }
+}
+\end{lstlisting}
 
 \end{document}
