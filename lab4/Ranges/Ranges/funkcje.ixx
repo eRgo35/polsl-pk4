@@ -81,9 +81,16 @@ export void text_transformer(std::string text)
 	std::cout << text_parts[0].str() << std::endl;
 	std::cout << text_parts[1].str() << std::endl;
 
-	// std::string cesar = std::views::transform(text, [&move](char c) {});
+	int move = std::stoi(text_parts[0].str());
+	std::string input = text_parts[1].str();
 
-	std::cout << cesar << std::endl;
+	auto cesar = std::views::transform(input, [&move](char c) {
+		return c + move;
+	});
+
+	for (char c : cesar)
+		std::cout << c;
+	std::cout << std::endl;
 }
 
 export void find_first_non_repeating_char(std::string text)
