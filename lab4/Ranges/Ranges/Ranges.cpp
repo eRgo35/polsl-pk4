@@ -6,6 +6,8 @@ int main()
 	std::string input;
 	std::string text;
 
+	// bardzo fajne narzedzie do debugowania
+	// po co komu menu glowne xd
 	goto debug;
 
 	std::cout << "--- Zadanie 1. ---" << std::endl;
@@ -14,13 +16,14 @@ int main()
 	std::cin >> number;
 	roman_converter(number);
 
+	debug:
 	std::cout << "--- Zadanie 2. ---" << std::endl;
 
 	std::cout << "Provide a number and chars with spaces: ";
 	std::cin >> input;
 	text_transformer(input);
 
-	debug:
+	// debug:
 	std::cout << "--- Zadanie 3. ---" << std::endl;
 
 	std::cout << "Gimme a text: ";

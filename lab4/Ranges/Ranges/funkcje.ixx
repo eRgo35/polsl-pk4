@@ -2,10 +2,12 @@
 #include <iomanip>
 
 export module funkcje;
+
 export import <iostream>;
 export import <vector>;
 import <string>;
 import <regex>;
+import <sstream>;
 
 export void roman_converter(int number)
 {
@@ -66,7 +68,22 @@ export void roman_converter(int number)
 }
 export void text_transformer(std::string text)
 {
-	std::cout << text;
+	std::cout << text << std::endl;
+	std::smatch text_parts;
+
+	std::regex re("(\\d{1,2})([\\w\\s]+)");
+	if (!std::regex_match(text, text_parts, re))
+	{
+		std::cout << "bad format :(" << std::endl;
+		return;
+	}
+
+	std::cout << text_parts[0].str() << std::endl;
+	std::cout << text_parts[1].str() << std::endl;
+
+	// std::string cesar = std::views::transform(text, [&move](char c) {});
+
+	std::cout << cesar << std::endl;
 }
 
 export void find_first_non_repeating_char(std::string text)
@@ -97,6 +114,38 @@ export void check_friends(int num1, int num2)
 		std::cout << "out of bounds" << std::endl;
 		return;
 	}
+
+	std::vector<int> divs1;
+	std::vector<int> divs2;
+
+	for (int i = 1; i < num1; i++)
+	{
+		if (num1 % i != 0)
+			continue;
+
+		divs1.push_back(i);
+	}
+
+	for (int i = 1; i < num2; i++)
+	{
+		if (num2 % i != 0)
+			continue;
+
+		divs2.push_back(i);
+	}
+
+	int sum1 = 0;
+	std::ranges::for_each(divs1, [&sum1](int divisor) {sum1 += divisor; });
+	int sum2 = 0;
+	std::ranges::for_each(divs2, [&sum2](int divisor) {sum2 += divisor; });
+
+	if (num1 == sum2 || num2 == sum1)
+	{
+		std::cout << "we're friends! yay!" << std::endl;
+		return;
+	}
+
+	std::cout << "we're hating each other :(" << std::endl;
 }
 
 export void fizz_buzz()
@@ -195,20 +244,20 @@ export void collatz_calculator()
 		int steps = 0;
 
 		while (num != 1 && steps < 1000) {
-			if (num % 2 == 0)
+			if (num % 2 != 0)
 			{
-				num /= 2;
+				num = 3 * num + 1;
 			}
 			else
 			{
-				num = 3 * num + 1;
+				num /= 2;
 			}
 			steps++;
 		}
 
 		return steps;
 
-		std::cout << "Did number: " << n << std::endl;
+		std::cout << "Did number: " << num << std::endl;
 		std::cout << "In steps: " << steps << std::endl;
 	});
 }
