@@ -1,10 +1,11 @@
 #include <ranges>
+#include <iomanip>
 
 export module funkcje;
-import <iostream>;
-import <iomanip>;
-import <vector>;
-import <utility>;
+export import <iostream>;
+export import <vector>;
+import <string>;
+import <regex>;
 
 export void roman_converter(int number)
 {
@@ -51,7 +52,7 @@ export void roman_converter(int number)
 	};
 
 	std::string numeral;
-	for (auto roman : roman_table | std::views::filter([number](auto roman) { return number >= roman.first; }))
+	for (auto roman : roman_table | std::views::filter( [number] (auto roman) { return number >= roman.first; }))
 	{
 		while (number >= roman.first)
 		{
@@ -70,7 +71,23 @@ export void text_transformer(std::string text)
 
 export void find_first_non_repeating_char(std::string text)
 {
-	std::cout << text;
+	std::cout << text << std::endl;
+
+	std::regex re("[\\d\\w\\s]+");
+	if (!std::regex_match(text, re))
+	{
+		std::cout << "oops, I guess you messed up" << std::endl;
+		return;
+	}
+
+	bool first = true;
+	std::ranges::for_each(text, [text, &first](char c) {
+		if (text.find_first_of(c) == text.find_last_of(c) && first)
+		{
+			std::cout << "non repearing char: " << c << std::endl;
+			first = false;
+		}
+	});
 }
 
 export void check_friends(int num1, int num2)
@@ -85,51 +102,188 @@ export void check_friends(int num1, int num2)
 export void fizz_buzz()
 {
 	std::cout << "Fizz-buzz" << std::endl;
+
 	std::string response;
-	int counter = 1;
-	
-	std::cout << "PC > 1" << std::endl;
+	int count = 1;
 
-	do {
+	std::cout << "AI> " << count << std::endl;
+
+	std::cout << "You> ";
+	std::cin >> response;
+
+	while (response != "Stop")
+	{
+		if (response == "Fizz" || response == "Buzz" || response == "FizzBuzz") {
+			count++;
+			count++;
+			
+			if (count % 5 == 0 && count % 3 == 0)
+			{
+				std::cout << "AI> Fizz Buzz" << std::endl;
+			}
+			else if (count % 3 == 0)
+			{
+				std::cout << "AI> Fizz" << std::endl;
+			}
+			else if (count % 5 == 0)
+			{
+				std::cout << "AI> Buzz" << std::endl;
+			}
+			else {
+				std::cout << "AI> " << count << std::endl;
+			}
+
+			std::cout << "You> ";
+			std::cin >> response;
+
+			continue;
+		}
+		 
+		count++;
+		int res = std::stoi(response);
+
+		if (res != count) {
+			std::cout << res << count;
+			std::cout << "fail! start again!" << std::endl;
+			count = 1;
+			std::cout << "AI> " << count << std::endl;
+			count++;
+
+			std::cout << "You> ";
+			std::cin >> response;
+		}
+		count++;
+
+		if (count % 5 == 0 && count % 3 == 0)
+		{
+			std::cout << "AI> Fizz Buzz" << std::endl;
+		}
+		else if (count % 3 == 0)
+		{
+			std::cout << "AI> Fizz" << std::endl;
+		}
+		else if (count % 5 == 0)
+		{
+			std::cout << "AI> Buzz" << std::endl;
+		}
+		else {
+			std::cout << "AI> " << count << std::endl;
+		}
+
+		std::cout << "You> ";
 		std::cin >> response;
-		counter++;
+	}
 
-
-	} while (response != "Stop");
+	std::cout << "Thanks for playing!" << std::endl;
 }
 
 export void collatz_calculator()
 {
+	std::cout << "Collatz numbers to check:" << std::endl;
+
 	std::vector<int> numbers;
-	char number;
+	int input;
 
 	do {
-		std::cout << "add numer (q to stop): ";
-		std::cin >> number;
+		std::cin >> input;
+		numbers.push_back(input);
+	} while (input != 0);
 
-		numbers.push_back(number - '0');
-	} while (number != 'q');
+	std::cout << "Collatz steps required:" << std::endl;
+	std::ranges::for_each(numbers, [](int num) {
 
-	std::cout << "[ ";
-	for (int i = 0; i < numbers.size(); i++)
-	{
-		std::cout << number << " ";
-	}
-	std::cout << "]" << std::endl;
+		int steps = 0;
 
+		while (num != 1 && steps < 1000) {
+			if (num % 2 == 0)
+			{
+				num /= 2;
+			}
+			else
+			{
+				num = 3 * num + 1;
+			}
+			steps++;
+		}
+
+		return steps;
+
+		std::cout << "Did number: " << n << std::endl;
+		std::cout << "In steps: " << steps << std::endl;
+	});
 }
 
 export void matrix_calculator(std::vector<std::vector<int>> matrix)
 {
 	std::cout << "Matrix calculator" << std::endl;
 	
-	for (auto r : matrix)
-		for (auto w : matrix)
+	std::vector<int> tmatrix;
+	std::vector<int> ttmatrix;
+	int div = 3;
 
+	for (auto r : matrix)
+	{
+		std::cout <<  "| ";
+		for (auto w : r)
+		{
+			std::cout << std::setw(2) << w << " ";
+			tmatrix.push_back(w);
+		}
+		std::cout << "|" << std::endl;
+	}
+	std::cout << std::endl;
+
+	for (int i = 0; i < 3; i++)
+		for (int j = 0; j < 3; j++)
+			ttmatrix.push_back(matrix[j][i]);
 
 	// metoda Sarrusa
-	int det = (matrix[0][0] * matrix[1][1] * matrix[2][2] + matrix[0][1] * matrix[1][2] * matrix[2][0] + matrix[0][2] * matrix[1][0] * matrix[2][1])
-				- (matrix[0][2] * matrix[1][1] * matrix[2][0] + matrix[0][0] * matrix[1][2] * matrix[2][1] + matrix[0][1] * matrix[1][0] * matrix[2][2]);
+	int determinant = (matrix[0][0] * matrix[1][1] * matrix[2][2] + matrix[0][1] * matrix[1][2] * matrix[2][0] + matrix[0][2] * matrix[1][0] * matrix[2][1]) - (matrix[0][2] * matrix[1][1] * matrix[2][0] + matrix[0][0] * matrix[1][2] * matrix[2][1] + matrix[0][1] * matrix[1][0] * matrix[2][2]);
 
-	std::cout << "det(matrix) = " << det << std::endl;
+	std::cout << "det(matrix) = " << determinant << std::endl;
+
+
+	int tdiv = div;
+	for (auto r : tmatrix | std::views::transform([](auto r) { return (r % 2 == 0) ? 1 : r; }))
+	{
+		tdiv--;
+		// std::cout << "(" << tdiv << ")" << std::endl;
+		if (tdiv == 0)
+		{
+			std::cout << std::setw(2) << r << " ";
+			std::cout << "|" << std::endl;
+			tdiv = div;
+		}
+		else if (tdiv == 2)
+		{
+			std::cout << "| ";
+			std::cout << std::setw(2) << r << " ";
+		}
+		else {
+			std::cout << std::setw(2) << r << " ";
+		}
+	}
+	std::cout << std::endl;
+
+	tdiv = div;
+	for (auto r : ttmatrix | std::views::transform([](auto r) { return (r % 2 == 0) ? 1 : r; }))
+	{
+		tdiv--;
+		// std::cout << "(" << tdiv << ")" << std::endl;
+		if (tdiv == 0)
+		{
+			std::cout << std::setw(2) << r << " ";
+			std::cout << "|" << std::endl;
+			tdiv = div;
+		}
+		else if (tdiv == 2)
+		{
+			std::cout << "| ";
+			std::cout << std::setw(2) << r << " ";
+		}
+		else {
+			std::cout << std::setw(2) << r << " ";
+		}
+	}
+	std::cout << std::endl;
 }
