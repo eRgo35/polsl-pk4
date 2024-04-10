@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_9D8xcPWyEe6BReBP-oFiEw" name="nlp-platform">
+  <packageImport xmi:type="uml:PackageImport" xmi:id="_9Eot8PWyEe6BReBP-oFiEw">
+    <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
+  </packageImport>
+  <packagedElement xmi:type="uml:Realization" xmi:id="_aZlZQPW0Ee6Tf7IRYPOlcw" client="_wv_QAPWzEe6Tf7IRYPOlcw" supplier="_9D8xcPWyEe6BReBP-oFiEw"/>
+  <packagedElement xmi:type="uml:Realization" xmi:id="_bBr7EPW0Ee6Tf7IRYPOlcw" client="_txF18PWzEe6Tf7IRYPOlcw" supplier="_9D8xcPWyEe6BReBP-oFiEw"/>
+  <packagedElement xmi:type="uml:Association" xmi:id="_pITQcPW0Ee6Tf7IRYPOlcw" memberEnd="_pIT3gPW0Ee6Tf7IRYPOlcw _pIT3gfW0Ee6Tf7IRYPOlcw">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_pITQcfW0Ee6Tf7IRYPOlcw" source="org.eclipse.papyrus">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_pITQcvW0Ee6Tf7IRYPOlcw" key="nature" value="UML_Nature"/>
+    </eAnnotations>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_pIT3gPW0Ee6Tf7IRYPOlcw" name="communication" type="_h13aEPWzEe6Tf7IRYPOlcw" association="_pITQcPW0Ee6Tf7IRYPOlcw"/>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_pIT3gfW0Ee6Tf7IRYPOlcw" name="sentiment" type="_qxZxsPWzEe6Tf7IRYPOlcw" association="_pITQcPW0Ee6Tf7IRYPOlcw"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_qzPvUPW0Ee6Tf7IRYPOlcw" memberEnd="_qzQWYvW0Ee6Tf7IRYPOlcw _qzQWY_W0Ee6Tf7IRYPOlcw">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_qzQWYPW0Ee6Tf7IRYPOlcw" source="org.eclipse.papyrus">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_qzQWYfW0Ee6Tf7IRYPOlcw" key="nature" value="UML_Nature"/>
+    </eAnnotations>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_qzQWYvW0Ee6Tf7IRYPOlcw" name="communication" type="_h13aEPWzEe6Tf7IRYPOlcw" association="_qzPvUPW0Ee6Tf7IRYPOlcw"/>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_qzQWY_W0Ee6Tf7IRYPOlcw" name="translate" type="_n9AXcPWzEe6Tf7IRYPOlcw" association="_qzPvUPW0Ee6Tf7IRYPOlcw"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Realization" xmi:id="_1QlB4PZZEe6Ydr1w88dr3Q" client="_EdNZkPZZEe6Ydr1w88dr3Q" supplier="_n9AXcPWzEe6Tf7IRYPOlcw"/>
+  <packagedElement xmi:type="uml:Class" xmi:id="_n9AXcPWzEe6Tf7IRYPOlcw" name="Translate" visibility="public" isAbstract="true" isActive="true">
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_niKUoPZaEe6Ydr1w88dr3Q" name="source_language" visibility="private" type="_86BqEPZaEe6Ydr1w88dr3Q"/>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_WXBzcPZcEe6Ydr1w88dr3Q" name="destination_language" visibility="private" type="_86BqEPZaEe6Ydr1w88dr3Q"/>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_beWBAPaoEe6Dd7R7lt6ieg" name="source_text" visibility="private">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_dI8hoPaoEe6Dd7R7lt6ieg" name="destination_text" visibility="private">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_XsHlMParEe62ct8FjTYuaA" name="isDetection" visibility="private">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_cIVR0ParEe62ct8FjTYuaA" name="isAnnonimizing" visibility="private">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+    </ownedAttribute>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_8XqR8PZcEe6Ydr1w88dr3Q" name="get_source_language"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_CZji8PZdEe6Ydr1w88dr3Q" name="set_source_language">
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_igh04PapEe62ct8FjTYuaA" name="language" type="_86BqEPZaEe6Ydr1w88dr3Q"/>
+    </ownedOperation>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_E-pV4PZdEe6Ydr1w88dr3Q" name="get_destination_language"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_OcSVAPZdEe6Ydr1w88dr3Q" name="set_destination_langugage">
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_lIyQkPapEe62ct8FjTYuaA" name="language" type="_86BqEPZaEe6Ydr1w88dr3Q"/>
+    </ownedOperation>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_nYDZ8PaoEe6Dd7R7lt6ieg" name="Translate" concurrency="guarded">
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_S_JxsPapEe62ct8FjTYuaA" name="source_language" type="_86BqEPZaEe6Ydr1w88dr3Q"/>
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_WtsgAPapEe62ct8FjTYuaA" name="destination_language" type="_86BqEPZaEe6Ydr1w88dr3Q"/>
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_cUnsQPapEe62ct8FjTYuaA" name="input_text">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedParameter>
+    </ownedOperation>
+    <nestedClassifier xmi:type="uml:PrimitiveType" xmi:id="_JfmcIParEe62ct8FjTYuaA" name="PrimitiveType10"/>
+    <nestedClassifier xmi:type="uml:PrimitiveType" xmi:id="_K1_nUParEe62ct8FjTYuaA" name="PrimitiveType11"/>
+    <nestedClassifier xmi:type="uml:PrimitiveType" xmi:id="_LBwycParEe62ct8FjTYuaA" name="PrimitiveType12"/>
+    <nestedClassifier xmi:type="uml:PrimitiveType" xmi:id="_OM5RsParEe62ct8FjTYuaA" name="PrimitiveType13"/>
+    <nestedClassifier xmi:type="uml:Interface" xmi:id="_OXvPwParEe62ct8FjTYuaA" name="Interface14"/>
+    <nestedClassifier xmi:type="uml:Enumeration" xmi:id="_OfuuIParEe62ct8FjTYuaA" name="Enumeration15"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_86BqEPZaEe6Ydr1w88dr3Q" name="Language" visibility="public">
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_CJNkYPZeEe6Ydr1w88dr3Q" name="code" visibility="private">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_I9gisPZeEe6Ydr1w88dr3Q" name="name" visibility="private">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_BbrTgPZfEe6Ydr1w88dr3Q" name="id" visibility="private">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+    </ownedAttribute>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_V26eEPZeEe6Ydr1w88dr3Q" name="Language">
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_hMfPMPZeEe6Ydr1w88dr3Q" name="code">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedParameter>
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_mATjgPZeEe6Ydr1w88dr3Q" name="name">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedParameter>
+    </ownedOperation>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_txF18PWzEe6Tf7IRYPOlcw" name="llmTranslate" isActive="true"/>
+  <packagedElement xmi:type="uml:Class" xmi:id="_EdNZkPZZEe6Ydr1w88dr3Q" name="cTranslate" isActive="true"/>
+  <packagedElement xmi:type="uml:Class" xmi:id="_wv_QAPWzEe6Tf7IRYPOlcw" name="nlpTranslate" isActive="true"/>
+  <packagedElement xmi:type="uml:Class" xmi:id="_h13aEPWzEe6Tf7IRYPOlcw" name="Communication" visibility="public" isAbstract="true" isActive="true"/>
+  <packagedElement xmi:type="uml:Class" xmi:id="_qxZxsPWzEe6Tf7IRYPOlcw" name="Sentiment">
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_wiViYPZfEe6Ydr1w88dr3Q" name="rpc" type="_Q1t_oPZfEe6Ydr1w88dr3Q"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Dependency" xmi:id="_I2MkUPZfEe6Ydr1w88dr3Q" name="&lt;&lt;uses>>" client="_n9AXcPWzEe6Tf7IRYPOlcw" supplier="_86BqEPZaEe6Ydr1w88dr3Q"/>
+  <packagedElement xmi:type="uml:Class" xmi:id="_Q1t_oPZfEe6Ydr1w88dr3Q" name="Stream"/>
+  <packagedElement xmi:type="uml:Class" xmi:id="_YNllEPZfEe6Ydr1w88dr3Q" name="gRPC"/>
+  <packagedElement xmi:type="uml:Class" xmi:id="_Y7740PZfEe6Ydr1w88dr3Q" name="Sockets"/>
+  <packagedElement xmi:type="uml:Class" xmi:id="_ZmAJgPZfEe6Ydr1w88dr3Q" name="dummy"/>
+  <packagedElement xmi:type="uml:Dependency" xmi:id="_exqWEPZfEe6Ydr1w88dr3Q" name="&lt;&lt;uses>>" client="_ZmAJgPZfEe6Ydr1w88dr3Q" supplier="_Q1t_oPZfEe6Ydr1w88dr3Q"/>
+  <packagedElement xmi:type="uml:Dependency" xmi:id="_fXIaoPZfEe6Ydr1w88dr3Q" name="&lt;&lt;uses>>" client="_Y7740PZfEe6Ydr1w88dr3Q" supplier="_Q1t_oPZfEe6Ydr1w88dr3Q"/>
+  <packagedElement xmi:type="uml:Dependency" xmi:id="_if0C0PZfEe6Ydr1w88dr3Q" name="&lt;&lt;uses>>" client="_YNllEPZfEe6Ydr1w88dr3Q" supplier="_Q1t_oPZfEe6Ydr1w88dr3Q"/>
+  <packagedElement xmi:type="uml:Dependency" xmi:id="_0OC_IPZfEe6Ydr1w88dr3Q" name="&lt;&lt;uses>>" client="_qxZxsPWzEe6Tf7IRYPOlcw" supplier="_Q1t_oPZfEe6Ydr1w88dr3Q"/>
+  <packagedElement xmi:type="uml:Class" xmi:id="_9ZFLUPZfEe6Ydr1w88dr3Q" name="NLTK"/>
+  <packagedElement xmi:type="uml:Class" xmi:id="_-A-40PZfEe6Ydr1w88dr3Q" name="NaiveBayes"/>
+  <packagedElement xmi:type="uml:Class" xmi:id="__gMBwPZfEe6Ydr1w88dr3Q" name="Token"/>
+  <packagedElement xmi:type="uml:Class" xmi:id="_Ewzm0PZgEe6Ydr1w88dr3Q" name="Tokenizer"/>
+  <packagedElement xmi:type="uml:Dependency" xmi:id="_HrWsYPZgEe6Ydr1w88dr3Q" name="&lt;&lt;uses>>" client="__gMBwPZfEe6Ydr1w88dr3Q" supplier="_Ewzm0PZgEe6Ydr1w88dr3Q"/>
+  <packagedElement xmi:type="uml:Realization" xmi:id="_JqWIoPZgEe6Ydr1w88dr3Q" client="_-A-40PZfEe6Ydr1w88dr3Q" supplier="_qxZxsPWzEe6Tf7IRYPOlcw"/>
+  <packagedElement xmi:type="uml:Realization" xmi:id="_KoJNoPZgEe6Ydr1w88dr3Q" client="_9ZFLUPZfEe6Ydr1w88dr3Q" supplier="_qxZxsPWzEe6Tf7IRYPOlcw"/>
+  <packagedElement xmi:type="uml:Dependency" xmi:id="_wvlewPZgEe6Ydr1w88dr3Q" name="&lt;&lt;uses>>" client="_qxZxsPWzEe6Tf7IRYPOlcw" supplier="_Ewzm0PZgEe6Ydr1w88dr3Q"/>
+  <packagedElement xmi:type="uml:Realization" xmi:id="_X6s98PZiEe6Ydr1w88dr3Q" client="_YNllEPZfEe6Ydr1w88dr3Q" supplier="_h13aEPWzEe6Tf7IRYPOlcw"/>
+  <packagedElement xmi:type="uml:Realization" xmi:id="_YeoxcPZiEe6Ydr1w88dr3Q" client="_Y7740PZfEe6Ydr1w88dr3Q" supplier="_h13aEPWzEe6Tf7IRYPOlcw"/>
+  <packagedElement xmi:type="uml:Realization" xmi:id="_Y_rpAPZiEe6Ydr1w88dr3Q" client="_ZmAJgPZfEe6Ydr1w88dr3Q" supplier="_h13aEPWzEe6Tf7IRYPOlcw"/>
+  <packagedElement xmi:type="uml:Dependency" xmi:id="_CKo2MPaqEe62ct8FjTYuaA" name="&lt;&lt;uses>>" client="_n9AXcPWzEe6Tf7IRYPOlcw" supplier="_Ewzm0PZgEe6Ydr1w88dr3Q"/>
+  <packagedElement xmi:type="uml:Class" xmi:id="_WnmpoPaqEe62ct8FjTYuaA" name="statisticalTranslate" isActive="true"/>
+  <packagedElement xmi:type="uml:Realization" xmi:id="_f06twPaqEe62ct8FjTYuaA" client="_WnmpoPaqEe62ct8FjTYuaA" supplier="_n9AXcPWzEe6Tf7IRYPOlcw"/>
+  <packagedElement xmi:type="uml:Class" xmi:id="_lx5CgPaqEe62ct8FjTYuaA" name="AnnonimizingEngine"/>
+  <packagedElement xmi:type="uml:Class" xmi:id="_-cy2APaqEe62ct8FjTYuaA" name="DetectionEngine"/>
+  <packagedElement xmi:type="uml:Dependency" xmi:id="_FZQ44ParEe62ct8FjTYuaA" name="&lt;&lt;uses>>" client="_n9AXcPWzEe6Tf7IRYPOlcw" supplier="_-cy2APaqEe62ct8FjTYuaA"/>
+  <packagedElement xmi:type="uml:Dependency" xmi:id="_hYBCwParEe62ct8FjTYuaA" name="&lt;&lt;uses>>" client="_n9AXcPWzEe6Tf7IRYPOlcw" supplier="_lx5CgPaqEe62ct8FjTYuaA"/>
+  <packagedElement xmi:type="uml:Dependency" xmi:id="_3gbrYParEe62ct8FjTYuaA" name="&lt;&lt;uses>>" client="_n9AXcPWzEe6Tf7IRYPOlcw" supplier="_Q1t_oPZfEe6Ydr1w88dr3Q"/>
+  <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_lcqEQPaoEe6Dd7R7lt6ieg">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_lcsggPaoEe6Dd7R7lt6ieg" source="http://www.eclipse.org/uml2/2.0.0/UML">
+      <references xmi:type="ecore:EPackage" href="pathmap://PAPYRUS_ACTIONLANGUAGE_PROFILE/ActionLanguage-Profile.profile.uml#_Kv8EIKFXEeS_KNX0nfvIVQ"/>
+    </eAnnotations>
+    <appliedProfile xmi:type="uml:Profile" href="pathmap://PAPYRUS_ACTIONLANGUAGE_PROFILE/ActionLanguage-Profile.profile.uml#ActionLanguage"/>
+  </profileApplication>
+</uml:Model>
