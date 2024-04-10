@@ -10,4 +10,6 @@ export struct weatherNode {
 
 export struct matrix {
 	std::vector<std::vector<int>> data;
+	int x;
+	int y;
 };
