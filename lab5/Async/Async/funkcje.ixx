@@ -8,6 +8,8 @@ import <random>;
 import <iomanip>;
 import <fstream>;
 import <regex>;
+import <sstream>;
+import <map>;
 
 export import structs;
 
@@ -56,7 +58,18 @@ export matrix generate_matrix(int x, int y)
 	for (auto& worker : workers) {
 		m.data.push_back(worker.get());
 	}
-	
+
+	for (int i = 0; i < y; i++) 
+	{
+		std::vector<int> col;
+		for (int j = 0; j < x; j++)
+		{
+			col.push_back(m.data[i][j]);
+		}
+
+		m.cols.push_back(col);
+	}
+
 	return m;
 }
 
@@ -94,7 +107,7 @@ export matrix multiply_matrix(matrix m1, matrix m2)
 				int value = 0;
 
 				for (int k = 0; k < m1.y; k++) {
-					value += m1.data[i][k] * m2.data[i][k]; // something is not right here yet...
+					value += m1.data.at(i).at(k) * m2.cols.at(j).at(k);
 				}
 
 				row.push_back(value);
@@ -139,19 +152,51 @@ export void count_and_uppercase(std::string key, std::string file_path)
 		{
 			blob.push_back(std::async(std::launch::async, [&loaded_blob, key]() {
 				std::regex re(key);
-				std::smatch match;
+				std::smatch matches;
 
-				std::regex_search(loaded_blob, match, re);
+				std::regex_search(loaded_blob, matches, re);
 
-				std::pair<int, std::string> searched = { match.length(), loaded_blob };
+				for (auto c : loaded_blob)
+					c = (char)std::tolower(c);
+				
+				// std::cout << loaded_blob;
+
+				std::pair<int, std::string> searched = { matches.length(), loaded_blob };
 				return searched;
 			}));
 
 			loaded_blob = "";
 		}
 	}
-
 	file.close();
+
+	std::vector<std::pair<int, std::string>> results;
+	int occurences = 0;
+	std::stringstream out("");
+
+	for (auto& result : blob)
+	{
+		std::pair<int, std::string> promise = result.get();
+
+		results.push_back(promise);
+		occurences += promise.first;
+		out << promise.second;
+	}
+
+	std::ofstream fileout;
+	fileout.open(file_path);
+	
+	if (!fileout.good())
+	{
+		std::cout << "Well.. something is messsed up..." << std::endl;
+		return;
+	}
+
+	fileout << out.str();
+
+	std::cout << "Found: " << occurences << " occurences!" << std::endl;
+
+	fileout.close();
 }
 
 int generate_points(int points) {
@@ -198,7 +243,7 @@ export void one_billion_rows(std::string file_path)
 {
 	std::ifstream file;
 
-	std::vector<std::future<std::string>> blob;
+	std::vector<std::future<std::map<std::string, weatherNode>>> blob;
 
 	file.open(file_path);
 
@@ -218,10 +263,33 @@ export void one_billion_rows(std::string file_path)
 		line += "\n";
 		loaded_blob += line;
 
-		if (lines > 200)
+		if (lines > 500)
 		{
 			blob.push_back(std::async(std::launch::async, [&loaded_blob]() {
-				return loaded_blob;
+				std::map<std::string, weatherNode> nodes;
+				std::stringstream ss(loaded_blob);
+				std::string name, temp;
+				weatherNode node;
+
+				// std::cout << loaded_blob;
+
+				while (true)
+				{
+					if (!std::getline(ss, name, ';'))
+						break;
+
+					if (!std::getline(ss, temp, '\n'))
+						break;
+
+					// std::cout << name << temp << std::endl;
+
+					node.name = name;
+					node.temp = std::stoi(temp);
+
+					nodes[name] = node;
+				}
+
+				return nodes;
 				}));
 
 			loaded_blob = "";
@@ -229,4 +297,18 @@ export void one_billion_rows(std::string file_path)
 	}
 
 	file.close();
+
+	std::map<std::string, weatherNode> output;
+	for (auto& result : blob)
+	{
+		for (auto& node : result.get())
+		{
+			output[node.first] = node.second;
+		}
+	}
+
+	for (auto& result : output)
+	{
+		std::cout << result.second.name << " got [ " << result.second.temp << " degC ]" << std::endl;
+	}
 }
