@@ -1,36 +1,29 @@
-#include <random>
-
 import anagram;
 import numer_ksef;
 import uniqueCharacter;
 import sequence;
 import median;
+import rng;
 
 import <vector>;
 import <string>;
 import <iostream>;
+import <thread>;
 
-int generate_number(int min, int max)
-{
-	std::random_device rd;
-	std::mt19937 gen(rd());
-	std::uniform_int_distribution<> distrib(min, max);
-
-	return distrib(gen);
-}
-
-int main()
-{
+int main() {
 	// Zadanie 1
-	std::vector<std::string> words = {"thread", "daerht", "hterda", "htread"};
+	std::vector<std::string> words = { "thread", "daerht", "hterda", "htread" };
+	std::vector<std::string> words2 = { "ala", "lla", "awa", "waa"};
 
 	bool check = is_anagram(words);
+	bool check2 = is_anagram(words2);
 
-	std::cout << "Podany ciag " << (check ? "" : "nie") << " ma " << (check ? "anagramy!" : "anagramow!") << std::endl;
+	std::cout << "Pierwszy ciag " << (check ? "" : "nie ") << "ma " << (check ? "anagramy!" : "anagramow!") << std::endl;
+	std::cout << "Drugi ciag " << (check2 ? "" : "nie ") << "ma " << (check2 ? "anagramy!" : "anagramow!") << std::endl;
 
 	// Zadanie 2
 
-	unsigned int nip = 0;
+	std::string nip;
 	
 	std::cout << "Podaj swoj numer NIP: ";
 	std::cin >> nip;
@@ -64,8 +57,11 @@ int main()
 	for (int i = 0; i < 1000; i++)
 		kontener2.push_back(generate_number(0, 100));
 
-	double median = find_median(kontener2);
-	double dominant = find_dominant(kontener2);
+	double median = 0.0; 
+	int dominant = 0; 
+	
+	std::jthread md(find_median, std::ref(median), std::ref(kontener2));
+	std::jthread dm(find_dominant, std::ref(dominant), std::ref(kontener2));
 
 	std::cout << "Mediana zbioru wynosi: " << median << std::endl;
 	std::cout << "Dominanta zbioru wynosi: " << dominant << std::endl;
