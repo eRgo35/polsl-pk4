@@ -131,7 +131,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="bmi.ixx" />
     <ClCompile Include="Concepts.cpp" />
+    <ClCompile Include="functions.ixx" />
+    <ClCompile Include="library.ixx" />
+    <ClCompile Include="median.ixx" />
     <ClCompile Include="zespolone.ixx" />
     <ClCompile Include="pitagorejskie.ixx" />
   </ItemGroup>
