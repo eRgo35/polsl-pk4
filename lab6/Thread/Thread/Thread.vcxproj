@@ -130,6 +130,7 @@
     <ClCompile Include="anagram.ixx" />
     <ClCompile Include="median.ixx" />
     <ClCompile Include="numer_ksef.ixx" />
+    <ClCompile Include="rng.ixx" />
     <ClCompile Include="sequence.ixx" />
     <ClCompile Include="Thread.cpp" />
     <ClCompile Include="uniqueCharacter.ixx" />
