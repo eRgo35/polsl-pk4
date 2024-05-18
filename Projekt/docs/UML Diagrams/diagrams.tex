@@ -1,0 +1,99 @@
+\documentclass[a4paper,10pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8x]{inputenc}
+\usepackage[polish]{babel}
+\usepackage{fullpage}
+
+\usepackage{tikz-uml}
+
+\sloppy
+\hyphenpenalty 10000000
+
+\title{%
+  PK4: Platforma NLP \\
+  \large Diagramy UML}
+\author{Michał Czyż}
+
+\begin{document}
+\maketitle
+
+\section{Component Diagram}
+
+\begin{center}
+\begin{tikzpicture}
+
+\begin{umlcomponent}[x=3,y=-8]{Node Web Server}
+  \umlbasiccomponent[x=0,y=0]{React Frontend}
+\end{umlcomponent}
+
+\begin{umlcomponent}[x=0,y=0]{Main Platform}
+  \umlbasiccomponent[x=0,y=0]{Communication}
+  \umlbasiccomponent[x=0,y=-2]{Sentiment Analysis}
+  \umlbasiccomponent[x=0,y=-4]{Machine Translation}
+\end{umlcomponent}
+
+\begin{umlcomponent}[x=6,y=0]{Python API Server}
+  \umlbasiccomponent[x=0,y=0]{Flask API Server}
+  \umlbasiccomponent[x=0,y=-2]{Communication}
+
+  \umlrequiredinterface[interface=Request Forward, distance=4]{Flask API Server}
+\end{umlcomponent}
+
+\end{tikzpicture}
+\end{center}
+
+\section{Class Diagram}
+
+\begin{center}
+\begin{tikzpicture}
+  \begin{umlpackage}{Main C++ Platform}
+    % Communication classes
+
+    \umlclass[type=abstract,x=5,y=0]{Communication}{
+     -- server\_address : Address \\
+     -- port : uint \\
+    }{}
+
+    \umlclass[x=0,y=-4]{Rest}{
+     -- server\_address : Address \\
+     -- port : uint \\
+    }{}
+
+    \umlclass[x=5,y=-4]{Sockets}{
+     -- server\_address : Address \\
+     -- port : uint \\
+    }{}
+
+    \umlclass[x=10,y=-4]{dummy}{
+     -- server\_address : Address \\
+     -- port : uint \\
+    }{}
+
+    \umlreal{Rest}{Communication}
+    \umlreal{Sockets}{Communication}
+    \umlreal{dummy}{Communication}
+
+    % Translate Classes
+
+    \umlclass[type=abstract,x=5,y=-10]{Translate}{
+      -- destination\_language: Language \\
+      -- source\_language: Language \\
+      -- source\_text: String \\
+      -- translated\_text: String \\
+      -- isDetection: Boolean \\
+      -- isAnnonimizing: Boolean \\
+    }{
+      + Translate(source\_language: Language, destination\_language: Language) \\
+      + set\_text(source\_text: String) \\
+      + get\_text() \\
+      + proceed() \\
+    }
+
+    % Sentiment Analysis Classes
+
+  \end{umlpackage}
+\end{tikzpicture}
+\end{center}
+
+\end{document}

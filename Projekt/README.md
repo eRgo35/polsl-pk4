@@ -12,27 +12,39 @@ To start a part of software use below Instructions with quick start copy-paste c
 
 ### Webserver (Next.js & React)
 
-Make sure to have `nodejs` and `yarn` installed.
+Make sure to have `nodejs` and `npm` installed.
 
 To install dependecies:
 ```sh 
-$ npm install
+npm install
 ```
 
 To run project use:
 ```sh
-$ npm run dev
+npm run dev
+```
+
+Nix:
+```sh 
+nix-shell -p nodejs
 ```
 
 ### API Middleware (Python)
 
 Make sure you have `python` installed.
 
+Use activate.sh to prepare all dependecies.
+
 To run python just type:
 
 ```sh 
-$ python main.py
+python main.py
 
+```
+
+Nix:
+```sh 
+nix-shell -p python3
 ```
 
 ### Core Platform (C++)
@@ -41,16 +53,22 @@ Make sure you have installed `base-devel` and `cmake`.
 
 To compile C++ just run:
 
-```sh
-$ cd bin
+```sh 
+cd nlp
 ```
 
 ```sh
-$ cmake ..
+make
 ```
 
+Nix:
+```sh 
+nix-shell -p boost
+```
+
+To style all files use:
 ```sh
-$ make
+clang-format -i -style=Google **/*.cpp **/*.hpp
 ```
 
 ### Documentation (LaTeX)
@@ -58,6 +76,10 @@ $ make
 Make sure you have `texlive` installed and all its required dependecies
 
 To compile tex file into a pdf use:
+```sh
+cd docs
+```
+
 ```sh 
-$ pdflatex <file_name>.tex
+pdflatex <file_name>.tex
 ```

@@ -1,0 +1,10 @@
+flask
+flask-cors
+zmq
+nltk
+
+datasets
+transformers
+numpy
+keras
+tensorflow

@@ -8,11 +8,9 @@ import Footer from "./components/Footer";
 export default function Home() {
   return (
     <main className={styles.main}>
-      <Header />
-      <div className={styles.mainframe}>
-        <SideBar />
-        <Content />
-      </div>
+      <Header title={"Dashboard"} />
+      <SideBar />
+      <Content />
       <Footer />
     </main>
   );

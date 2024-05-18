@@ -5,8 +5,8 @@ export default function Footer() {
 
   return (
     <footer className={styles.footer}>
-      <span>Copyright &copy;{year} Michał Czyż, Dawid Głąb</span>
-      <span>All rights reservered.</span>
+      <span>NLP Platform</span>
+      <span>&copy;{year} Michał Czyż, Dawid Głąb. All rights reserved.</span>
     </footer>
   );
 }

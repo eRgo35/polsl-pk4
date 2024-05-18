@@ -1,0 +1,114 @@
+@startuml
+' Make graph monochrome
+' skinparam monochrome true
+
+' nice styles
+!includeurl https://raw.githubusercontent.com/matthewjosephtaylor/plantuml-style/master/style.pu
+
+' Lines
+' skinparam linetype polyline
+skinparam linetype ortho
+
+' Hide circles
+hide circle 
+
+' Rotate
+' left to right direction
+
+' --- Classes ---
+
+abstract class Communication {
+  {field} address
+  {field} port
+  {method} listen
+}
+
+class gRPCCommunication {
+  {field} address
+  {field} port
+  {method} listen
+}
+
+class BeastCommunication {
+  {field} address
+  {field} port
+  {method} listen
+}
+
+class DummyCommunication {
+  {field} address
+  {field} port
+  {method} listen
+}
+
+class SocketsCommunication {
+  {field} address
+  {field} port
+  {method} listen
+}
+
+abstract class Translate
+
+class statisticalTranslate
+
+class llmTranslate
+
+class cTranslate
+
+class nlpTranslate
+
+class AnnonimizingEngine
+
+class DetectionEngine
+
+class Tokenizer
+
+class Token 
+
+abstract class Sentiment
+
+class NLTK
+
+class NaiveBayes
+
+class Language
+
+class Address
+
+class AsyncLogger
+
+class Stream
+
+
+
+
+' --- Relations ---
+
+Communication <|.. gRPCCommunication
+Communication <|.. BeastCommunication
+Communication <|.. DummyCommunication
+Communication <|.. SocketsCommunication
+
+Translate <|.. statisticalTranslate
+Translate <|.. llmTranslate
+Translate <|.. cTranslate
+Translate <|.. nlpTranslate
+
+' Translate ..> AnnonimizingEngine
+' Translate ..> DetectionEngine
+' Translate ..> Language
+' Translate ..> Stream
+' Translate ..> Tokenizer
+
+Tokenizer <.. Token
+
+Sentiment <|.. NLTK
+Sentiment <|.. NaiveBayes
+
+' Sentiment ..> Tokenizer
+' Sentiment ..> Stream
+
+' Communication --- Sentiment
+' Communication --- Translate
+
+@enduml
