@@ -7,7 +7,7 @@ export default function Content() {
   const [status, setStatus] = useState("Press button for API Status")
 
   const pingStatus = () => {
-      fetch('http://localhost:8080/api/ping')
+      fetch('http://c2yz.com:8080/api/ping')
       .then((res) => res.json())
       .then((data) => {
         setStatus(data.data)

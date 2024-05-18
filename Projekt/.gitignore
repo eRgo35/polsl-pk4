@@ -19,3 +19,4 @@ consume/**
 consume
 temp
 api/__pycache__
+.direnv

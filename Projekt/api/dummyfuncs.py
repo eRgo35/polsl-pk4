@@ -1,14 +1,15 @@
 from transformers import pipeline
 
 def translate_text_dummy(data):
-    model_checkpoint = "Helsinki-NLP/opus-mt-en-fr"
+    model_checkpoint = "Helsinki-NLP/opus-mt-pl-en"
     translator = pipeline("translation", model=model_checkpoint)
     
+    translated = translator(data)
     
-    translator("Default to expanded threads")
-    
-    return "Witaj świecie!"
+    return translated
 
 def sentiment_analyze_dummy(data):
-
-    return True
+    classifier = pipeline("sentiment-analysis")
+    res = classifier(data)
+    
+    return res

@@ -57,6 +57,10 @@
           python-pkgs.transformers
           python-pkgs.tensorflow
           python-pkgs.keras
+
+          python-pkgs.pip
+          python-pkgs.setuptools
+          python-pkgs.keras-preprocessing
         ]))
       ];
 

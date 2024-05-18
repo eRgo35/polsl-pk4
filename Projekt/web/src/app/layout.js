@@ -9,7 +9,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" data-bs-core="elegant" data-bs-theme="dark">
+    <html lang="en" data-bs-theme="light" data-bs-core="modern">
       <body className="ps-md-sbwidth">{children}</body>
     </html>
   );

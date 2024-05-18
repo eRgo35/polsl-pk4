@@ -4,10 +4,11 @@ import styles from "../page.module.css"
 import { useState, useEffect } from 'react'
 
 export default function TranslateContent() {
-  const [status, setStatus] = useState("Press button for API Status")
+  const [status, setStatus] = useState("Przetwarzanie języka naturalnego")
+  const [translated, setTranslated] = useState("Response placeholder")
 
   const pingStatus = () => {
-      fetch('http://localhost:8080/api/translate', {
+      fetch('http://c2yz.com:8080/api/translate', {
         method: 'POST',
         headers: {
           'Accept': 'application/json',
@@ -16,17 +17,18 @@ export default function TranslateContent() {
         body: JSON.stringify({
           srcLanguage: "en",
           dstLanguage: "pl",
-          data: "Hello World"
+          data: status
         })
       })
       .then((res) => res.json())
       .then((data) => {
-        setStatus(data.data)
+        console.log(data)
+        setTranslated(data[0].translation_text)
       })
   }
 
   const updateStatus = () => {
-    setStatus("Loading...")
+    setTranslated("Loading...")
     pingStatus()
   }
 
@@ -36,10 +38,11 @@ export default function TranslateContent() {
         <h1>Machine Translation Tool!</h1>
         <p>Translate text from one language to other!</p>
         <p>Select a model from a list and choose a langauge pair</p>
-        <textarea cols="50" rows="20" maxLength="1024"></textarea>
+        <textarea className={styles.boxes} cols="50" rows="10" maxLength="1024" value={status} onChange={e => setStatus(e.target.value)}></textarea>
         <span>-&gt;</span>
-        <textarea cols="50" rows="20" maxLength="1024" value={status} disabled></textarea>
+        <textarea className={styles.boxes} cols="50" rows="10" maxLength="1024" value={translated} disabled></textarea>
         <button onClick={updateStatus}>Translate!</button>
+        <h1>Current: pl -&gt; en</h1>
       </div>
     </div>
   );

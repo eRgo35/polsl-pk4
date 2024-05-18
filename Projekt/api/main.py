@@ -26,6 +26,7 @@ CORS(app)
 
 @app.route("/api/ping", methods=['GET'])
 def ping():
+    return jsonify(data = "Online")
     try:
         client.send(b"ping", b"Online")
         reply = client.recv()
@@ -73,7 +74,7 @@ def translate():
     )
     
 
-@app.route("/api/sentiment")
+@app.route("/api/sentiment", methods=['POST'])
 def sentiment():
     req = request.get_json()
     mode = None
@@ -105,5 +106,5 @@ def sentiment():
     )
 
 if __name__ == "__main__":
-    app.run(debug=True, port=8080)
+    app.run(debug=False, host="0.0.0.0", port=8080)
 
