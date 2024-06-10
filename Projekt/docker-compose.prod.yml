@@ -1,0 +1,31 @@
+services:
+  web:
+    hostname: web
+    build: web
+    command: npm run build && npm run start
+    networks:
+      - platform
+    ports:
+      - "3000:3000"
+  
+  api:
+    hostname: api
+    build: api
+    command: gunicorn --bind 0.0.0.0:8080 wsgi:app
+    networks:
+      - platform
+    ports:
+      - "8080:8080"
+    
+  nlp:
+    hostname: nlp
+    build: nlp
+    command: mold -run make
+    networks:
+      - platform
+    ports:
+      - "5555:5555"
+
+networks:
+  platform:
+    external: true

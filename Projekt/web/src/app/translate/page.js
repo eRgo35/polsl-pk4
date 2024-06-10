@@ -1,17 +1,20 @@
-import styles from "../page.module.css";
+import Copyright from "@/components/Copyright";
+import TranslateForm from "./Translate";
+import { Container, Grid } from "@mui/material";
 
-import Header from "../components/Header";
-import SideBar from "../components/SideBar";
-import TranslateContent from "../components/TranslateContent";
-import Footer from "../components/Footer";
+export const metadata = {
+  title: "Machine Translation - NLP Platform"
+}
 
-export default function Home() {
+export default function Translate() {
   return (
-    <main className={styles.main}>
-      <Header title={"Machine Translation"} path={"translate"} />
-      <SideBar />
-      <TranslateContent />
-      {/* <Footer /> */}
-    </main>
+    <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+      <Grid container spacing={2}>
+        <Grid item xs={12}>
+          <TranslateForm />
+        </Grid>
+      </Grid>
+      <Copyright sx={{ pt: 4 }} />
+    </Container>
   );
 }

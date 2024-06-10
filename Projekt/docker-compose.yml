@@ -1,0 +1,42 @@
+services:
+  web:
+    hostname: web
+    build: web
+    command: npm run dev
+    networks:
+      - platform
+    volumes:
+      - ./web:/usr/app/
+      - /usr/app/node_modules
+    ports:
+      - "3000:3000"
+    depends_on:
+      - api
+  
+  api:
+    hostname: api
+    build: api
+    command: python main.py 
+    networks:
+      - platform
+    volumes:
+      - ./api:/usr/app/
+    ports:
+      - "8080:8080"
+    depends_on:
+      - nlp
+    
+  nlp:
+    hostname: nlp
+    build: nlp
+    command: mold -run make release
+    networks:
+      - platform
+    volumes:
+      - ./nlp:/usr/app/
+    ports:
+      - "5555:5555"
+
+networks:
+  platform:
+    external: true

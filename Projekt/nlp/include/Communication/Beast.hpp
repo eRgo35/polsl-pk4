@@ -13,13 +13,13 @@ class BeastCommunication : public Communication {
   BeastCommunication(Address address, int port)
       : Communication(address, port) {}
 
-  void listen() const override {
-    AsyncLogger* logger = AsyncLogger::GetInstance("filepath");
+  void listen() override {
+    AsyncLogger* console = AsyncLogger::GetInstance();
 
     std::stringstream listen_info;
     listen_info << "Listening on: " << get_address() << ":" << get_port();
 
-    logger->log(listen_info.str());
+    console->log(listen_info.str());
   }
 };
 }  // namespace COMMS

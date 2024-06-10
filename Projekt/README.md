@@ -15,41 +15,58 @@ To start a part of software use below Instructions with quick start copy-paste c
 Make sure to have `nodejs` and `npm` installed.
 
 To install dependecies:
+
 ```sh 
 npm install
 ```
 
 To run project use:
+
 ```sh
 npm run dev
 ```
 
-Nix:
-```sh 
-nix-shell -p nodejs
+To build and run on production:
+
+```sh
+npm run build && npm run start
 ```
 
 ### API Middleware (Python)
 
 Make sure you have `python` installed.
 
-Use activate.sh to prepare all dependecies.
+```sh
+cd api
+```
 
-To run python just type:
+Use activate.sh to prepare all dependecies:
+
+```sh
+./activate.sh
+```
+
+Activate venv:
+
+```sh
+source ./.venv/bin/activate
+```
+
+To run:
 
 ```sh 
 python main.py
-
 ```
 
-Nix:
-```sh 
-nix-shell -p python3
+To leave path
+
+```sh
+deactivate
 ```
 
 ### Core Platform (C++)
 
-Make sure you have installed `base-devel` and `cmake`.
+Make sure you have installed `base-devel`, `boost`, and `cppzmq`.
 
 To compile C++ just run:
 
@@ -58,12 +75,7 @@ cd nlp
 ```
 
 ```sh
-make
-```
-
-Nix:
-```sh 
-nix-shell -p boost
+mold -run make
 ```
 
 To style all files use:

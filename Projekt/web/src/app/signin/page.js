@@ -1,15 +1,33 @@
-import styles from "../page.module.css";
+import Copyright from "@/components/Copyright";
+import NextLink from 'next/link';
+import { Avatar, Box, Button, Checkbox, Container, FormControlLabel, Grid, Link, TextField, Typography } from "@mui/material";
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import SignInForm from "./SignInForm";
 
-import Header from "../components/Header";
-import SideBar from "../components/SideBar";
-import Content from "../components/Content";
-import Footer from "../components/Footer";
-
-export default function Home() {
-  return (
-    <main>
-      <p>Signin dialog!</p>
-    </main>
-  );
+export const metadata = {
+  title: "Sign in - NLP Platform"
 }
 
+export default function Signin() {
+  return (
+    <Container maxWidth="xs" sx={{ mt: 4, mb: 4 }}>
+      <Box
+        sx={{
+          marginTop: 8,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+        }}
+      >
+        {/* <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+          <LockOutlinedIcon />
+        </Avatar> */}
+        <Typography component="h1" variant="h4">
+          Sign in
+        </Typography>
+        <SignInForm />
+      </Box>
+      <Copyright sx={{ pt: 4 }} />
+    </Container>
+  );
+}

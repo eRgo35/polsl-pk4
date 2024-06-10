@@ -7,7 +7,7 @@
 
 namespace MT {
 class Translate {
- private:
+ protected:
   Language source;
   Language destination;
 

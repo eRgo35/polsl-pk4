@@ -1,9 +1,0 @@
-numpy
-pandas
-scipy
-matplotlib
-requests
-transformers
-tensorflow
-keras
-optree

@@ -8,7 +8,8 @@ class RPCClient(object):
     ctx = None
     client = None
     poller = None
-    timeout = 2500
+    timeout = 30000
+    # timeout = 10000
     verbose = False
 
     def __init__(self, broker, verbose=False):

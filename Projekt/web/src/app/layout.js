@@ -1,16 +1,22 @@
-import { Inter } from "next/font/google";
-import "./globals.css";
-import "halfmoon/css/halfmoon.min.css";
+import * as React from 'react';
+import { AppRouterCacheProvider } from '@mui/material-nextjs/v14-appRouter';
+import Wrapper from '@/components/Wrapper';
 
 export const metadata = {
   title: "NLP Platform",
-  description: "Natural Language Processing Platform",
+  description: "Welcome NLP Platform! Currently available features are Machine Translation and Sentiment Analysis.",
 };
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" data-bs-theme="light" data-bs-core="modern">
-      <body className="ps-md-sbwidth">{children}</body>
+    <html lang="en">
+      <body>
+        <AppRouterCacheProvider options={{ enableCssLayer: true }}>
+          <Wrapper>
+            {children}
+          </Wrapper>
+        </AppRouterCacheProvider>
+      </body>
     </html>
   );
 }

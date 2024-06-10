@@ -4,25 +4,26 @@
 #include <string>
 
 #include "../Network/Address.hpp"
+#include "../Network/Port.hpp"
 
 namespace COMMS {
 class Communication {
- private:
+ protected:
   Address address;
-  int port;
+  Port port;
 
  public:
-  Communication(Address address, int port) : address(address), port(port) {}
+  Communication(Address address, Port port) : address(address), port(port) {}
 
   Address get_address() const { return address; }
 
-  int get_port() const { return port; }
+  Port get_port() const { return port; }
 
   void set_address(Address new_address) { address = new_address; }
 
-  void set_port(int new_port) { port = new_port; }
+  void set_port(Port new_port) { port = new_port; }
 
-  virtual void listen() const = 0;
+  virtual void listen() = 0;
 };
 }  // namespace COMMS
 

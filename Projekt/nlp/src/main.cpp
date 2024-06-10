@@ -1,94 +1,59 @@
+#include <ranges>
 #include <string>
-#include <thread>
+#include <boost/python.hpp>
 
-#include "../include/Communication/Beast.hpp"
-#include "../include/Communication/Dummy.hpp"
-#include "../include/Engine/Language.hpp"
+#include "../include/Communication/Zmq.hpp"
+#include "../include/Engine/PythonBinding.hpp"
 #include "../include/Logger/AsyncLogger.hpp"
-#include "../include/Translate/Dummy.hpp"
-#include "../include/Translate/Statistical.hpp"
-#include "../include/Engine/Trainer.hpp"
-#include "../include/Communication/rpc.hpp"
-#include "../include/Communication/rpcWorker.hpp"
 
-void startBroker(int &verbose){
-  s_version_assert (4, 0);
-  s_catch_signals ();
-  broker brk(verbose);
-  brk.bind ("tcp://*:5555");
-  brk.start_brokering();
-  if (s_interrupted) printf ("W: interrupt received, shutting down...\n");
-  
-}
-
-void pingWorker(int &verbose, AsyncLogger* log){
-  mdwrk session ("tcp://localhost:5555", "ping", verbose);
-  zmsg *reply = 0;
-  while (1) {
-    log->log("Reply out:");
-    zmsg *request = session.recv (reply);
-    if (request == 0) {
-      break;              //  Worker was interrupted
-    }
-      reply = request;
-  }
-  free(reply);
-}
-
+namespace py = boost::python;
 
 int main(int argc, char** argv) {
-  AsyncLogger* logger = AsyncLogger::GetInstance("filepath");
+  AsyncLogger* console = AsyncLogger::GetInstance();
 
-  logger->log("NLP Platform");
-  logger->log("Version 1.0.0");
-  logger->log("Copyright(c) 2024 Michał Czyż, Dawid Głąb");
-  logger->log("All Rights Reserved");
+  console->log("NLP Platform");
+  console->log("Version 1.0.0");
+  console->log("Copyright(c) 2024 Michał Czyż, Dawid Głąb");
+  console->log("All Rights Reserved");
 
   Address address("127.0.0.1");
-  Address apipa("169.254.10.10");
-  COMMS::BeastCommunication comms(address, 4200);
-  COMMS::DummyCommunication dummycomms(apipa, 3366);
-  
-  // Begin Broker and Workers
-  //int verbose = (argc > 1 && strcmp (argv [1], "-v") == 0);
-  int verbose = 1;
-  std::jthread broker_thread(startBroker, std::ref(verbose));
-  std::jthread worker_thread(pingWorker, std::ref(verbose), std::ref(logger));
+  Port port(5555);
+  COMMS::ZmqCommunication com(address, port);
 
-  // comms.listen();
-  // dummycomms.listen();
+  auto args = std::views::iota(1, argc) | std::views::transform([&](int i) {
+                return std::string(argv[i]);
+              });
 
-  // logger->log("Hello Log Message!");
-  // logger->warn("This is a warning!");
-  // logger->log("Hello Log Message!");
-  // logger->error("Error occured message color!");
+  for (const auto& arg : args) {
+    if (arg == "-v" || arg == "--verbose") {
+      com.verbose();
+    }
 
-  // Language src("en");
-  // Language des("pl");
+    if (arg == "--version") {
+      return 0;
+    }
+  }
 
-  // MT::DummyTranslate engine(src, des);
-  // logger->log(engine.translate("Hello, dummy translate!"));
-  
-  // logger->error("---------------------------");
-  // logger->error("Training statistical model:");
+  // Py_Initialize();
 
-  // MT::Trainer model("stat_model_v1.smt");
-    
-  // std::string consume_path = "/home/mike/Projects/debug/sources.txt";
-  // std::string consume_pl_path = "/home/mike/Projects/debug/targets.txt";
-  
-  // logger->log("Consume path: " + consume_path);
-  // logger->log("Consume path: " + consume_pl_path);
+  // py::object main_module = py::import("__main__");
+  // py::object main_namespace = main_module.attr("__dict__");
 
-  // model.consume(consume_path, consume_pl_path);
+  // py::exec_file("models/hello.py", main_namespace);
 
-  // // std::string save_path = "/home/mike/Projects/nlp-platform/nlp/stat_model_v1.smt";
-  // // logger->log("Model path: " + save_path);
-  // // model.save(save_path);
- 
-  // MT::StatisticalTranslate stats(src, des);
-  // stats.use(model, model);
-  // logger->log(stats.translate("I just want to tell you how I am feeling"));
+  // PythonBinding* pyBinding = PythonBinding::GetInstance();
+  // py::object *main_namespace = pyBinding->get_main_namespace();
+
+  // py::object pyStringList = py::eval("stringlist()", *main_namespace);
+
+  // console->log("Length of list", py::len(pyStringList));
+
+  // for (int i = 0; i < py::len(pyStringList); i++) {
+  //   std::string value = py::extract<std::string>(pyStringList[i]);
+  //   console->log(i, "\t", value);
+  // }
+
+  com.listen();
 
   return 0;
 }

@@ -1,0 +1,13 @@
+[Unit]
+Description=Gunicorn instance to serve nlp-platform api
+After=network.target
+
+[Service]
+User=mike
+Group=www-data
+WorkingDirectory=/var/www/nlp-platform/api
+Environment="PATH=/var/www/nlp-platform/api/bin"
+ExecStart=/var/www/nlp-platform/api/bin/gunicorn --workers 3 --bind unix:main.sock -m 007 wsgi:app
+
+[Install]
+WantedBy=multi-user.target

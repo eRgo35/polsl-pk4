@@ -5,6 +5,6 @@
 
 class Tokenizer {
   Token token;
-}
+};
 
 #endif  // !TOKENIZER_HPP
